@@ -7,6 +7,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include("dashboard/includes/config.php");
 include("head.php"); 
+$con = $dbh; // Assuming this is a valid PDO connection
 
 
 
@@ -99,100 +100,92 @@ $destination_country_info = "NO DATA FOR THIS COUNTRY FOR NOW";
 
 
                     <div class="package-inner">
-                        <div class="row">
+    <div class="row">
+        <?php
+        // SQL to fetch packages along with country information
+        $sql3 = "SELECT * FROM packages, countries WHERE countries.country_id = packages.package_country 
+                AND package_status = '1' AND packages.package_country = '$posted_country_id' ORDER BY package_id DESC LIMIT 50";
+        $result3 = $conn->query($sql3);
 
+        while ($row3 = $result3->fetch_assoc()) {
+            $package_name = $row3['package_name'];
+            $package_id = $row3['package_id'];
+            $package_introduction = $row3['package_introduction'];
+            $package_days_and_nights = $row3['package_days_and_nights'];
+            $package_number_of_person = $row3['package_number_of_person'];
+            $package_country = $row3['country_name'];
+            $package_image = "assets/img/uploads/packages/" . $row3['package_image'];
 
-                        <?php
-             $sql3 = "SELECT * FROM packages,countries where countries.country_id=packages.package_country 
- and package_status='1' and packages.package_country='$posted_country_id' order by package_id DESC limit 50";
- 
- $result3 = $conn->query($sql3);
- while ($row3 = $result3->fetch_assoc()) {
-    $package_name = $row3['package_name'];
-    $package_id= $row3['package_id'];
-    $package_introduction = $row3['package_introduction'];
-    $package_description = $row3['package_description'];
-    $package_from_date = $row3['package_from_date'];
-    $package_to_date = $row3['package_to_date'];
-    $package_price = $row3['package_price'];
-    $package_travel_type = $row3['package_travel_type'];
-    $package_country = $row3['country_name'];
-    $package_type = $row3['package_type'];
+            // Convert the package price to a numeric value
+            $package_price = str_replace(',', '', $row3['package_price']);
+            $package_price = (float)$package_price;
 
-    $package_number_of_person = $row3['package_number_of_person'];
-    $package_status = $row3['package_status'];
+            // Query to check if there is a discount for the current package
+            $discount_query = "SELECT DiscountValue FROM PackageDiscounts WHERE DiscountPackageID = ? AND DiscountStatus = 1";
+            $stmt = $conn->prepare($discount_query);
+            $stmt->bind_param("i", $package_id);
+            $stmt->execute();
+            $discount_result = $stmt->get_result();
 
-    $package_days_and_nights = $row3['package_days_and_nights'];
-    $package_image =  "assets/img/uploads/packages/".$row3['package_image'];
-    $package_price = str_replace(',', '', $package_price);
-    // Convert to a float to ensure it's a proper numeric value
-$package_price = (float)$package_price;
+            $discounted_price = $package_price; // Default to original price
+            if ($discount_result->num_rows > 0) {
+                $discount_row = $discount_result->fetch_assoc();
+                $discount_value = $discount_row['DiscountValue'];
+                $discounted_price = $package_price - ($package_price * $discount_value / 100);
+            }
+        ?>
+            <div class="col-lg-4 col-md-6">
+                <div class="package-wrap">
+                <figure class="feature-image">
+                    <a href="itinerary.php?packageID=<?php echo $package_id; ?>">
+                        <img src="<?php echo $package_image; ?>" alt="" style="width: 360px; height: 200px; object-fit: cover; border-radius: 10px;">
+                    </a>
+                </figure>
 
-    ?>
-
-
-
-
-
-
-
-
-                            <div class="col-lg-4 col-md-6">
-                                <div class="package-wrap">
-                                    <figure class="feature-image">
-                                        <a href="itinerary.php?packageID=<?php echo $package_id; ?>">
-                                    <img src="<?php  echo $package_image;  ?>" alt="">
-                                 </a>
-                                    </figure>
-                                    <div class="package-price">
-                                        <h6>
-                                            <span> $ <?php  echo number_format($package_price,2);   ?> </span> / per person
-                                        </h6>
-                                    </div>
-                                    <div class="package-content-wrap">
-                                        <div class="package-meta text-center">
-                                            <ul>
-                                                <li>
-                                                    <i class="far fa-clock"></i> Days: <?php  echo $package_days_and_nights;  ?>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-user-friends"></i> People: <?php  echo $package_number_of_person;  ?>
-                                                </li>
-                                                <li>
-                                                    <i class="fas fa-map-marker-alt"></i> <?php  echo $package_country;  ?>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="package-content">
-                                            <h3>
-                                                <a href="itinerary.php?packageID=<?php echo $package_id; ?>"><?php  echo $package_name;  ?></a>
-                                            </h3>
-                                           
-                                            <p><?php  echo $package_introduction;  ?></p>
-                                            <div class="btn-wrap">
-                                                <a href="itinerary.php?packageID=<?php echo $package_id; ?>" class="button-text width-6">View Iteneraries<i class="fas fa-arrow-right"></i></a>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-
-                            <?php  
-
-}
-?>
-
-
-
-
-                    
-                        </div>
-                     
+                    <div class="package-price">
+                        <?php if ($discounted_price < $package_price): ?>
+                            <h6>
+                                <span style="text-decoration: line-through; color: #3a53a3;"><small>$<?php echo number_format($package_price, 2); ?></small></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span> $<?php echo number_format($discounted_price, 2); ?> </span> / per person
+                            </h6>
+                        <?php else: ?>
+                            <h6>
+                                <span>$<?php echo number_format($package_price, 2); ?></span> / per person
+                            </h6>
+                        <?php endif; ?>
                     </div>
+                    <div class="package-content-wrap">
+                        <div class="package-meta text-center">
+                            <ul>
+                                <li>
+                                    <i class="far fa-clock"></i> Days: <?php echo $package_days_and_nights; ?>
+                                </li>
+                                <li>
+                                    <i class="fas fa-user-friends"></i> People: <?php echo $package_number_of_person; ?>
+                                </li>
+                                <li>
+                                    <i class="fas fa-map-marker-alt"></i> <?php echo $package_country; ?>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="package-content">
+                            <h3>
+                                <a href="itinerary.php?packageID=<?php echo $package_id; ?>"><?php echo $package_name; ?></a>
+                            </h3>
+                            <p><?php echo $package_introduction; ?></p>
+                            <div class="btn-wrap">
+                                <a href="itinerary.php?packageID=<?php echo $package_id; ?>" class="button-text width-6">View Itinerary <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php  
+        }
+        ?>
+    </div>
+</div>
+
                 </div>
             </section>
 

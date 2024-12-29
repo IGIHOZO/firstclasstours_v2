@@ -107,11 +107,13 @@ error_reporting(E_ALL);
 include("dashboard/includes/config.php");
 include("head.php"); 
 
+
 if (isset($_GET['packageID'])) {
     // Retrieve the country_id value
     $posted_package_id = $_GET['packageID'];
 
 }
+
 
 // Initialize package variables with default values
 $package_name = "NO data available for now";
@@ -152,6 +154,20 @@ $package_price = (float)$package_price;
     $package_image =  "assets/img/uploads/packages/".$row3['package_image'];
 
  }
+
+ $con = $dbh; 
+$discount_query = "SELECT DiscountValue FROM PackageDiscounts WHERE DiscountPackageID = ? AND DiscountStatus = 1";
+$stmt = $conn->prepare($discount_query);
+$stmt->bind_param("i", $posted_package_id);
+$stmt->execute();
+$discount_result = $stmt->get_result();
+
+$discounted_price = $package_price; // Default to original price
+if ($discount_result->num_rows > 0) {
+    $discount_row = $discount_result->fetch_assoc();
+    $discount_value = $discount_row['DiscountValue'];
+    $discounted_price = $package_price - ($package_price * $discount_value / 100);
+}
     ?> 
 
 
@@ -416,12 +432,19 @@ $no=$no+1;
                         </div>
                         <div class="col-lg-4">
                             <div class="sidebar">
-                                <div class="package-price">
-                                    <h5 class="price">
-                                        <span> $ <?php  echo number_format($package_price,2);   ?></span> / per person
-                                    </h5>
-                                 
-                                </div>
+                            <div class="package-price">
+                                <?php if ($discounted_price < $package_price): ?>
+                                    <h4>
+                                        <span style="text-decoration: line-through; color: #3a53a3;"><small>&nbsp;<?php echo number_format($package_price, 2); ?></small></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <span> $<?php echo number_format($discounted_price, 2); ?> </span> / per person
+                                    
+                                <?php else: ?>
+                                    <h6>
+                                        <span>$ <big><?php echo number_format($package_price, 2); ?></big></span> / per person
+                                    </h6>
+                                <?php endif; ?></h4>
+                            </div>
+
                                 <div class="widget-bg booking-form-wrap">
                                     <h4 class="bg-title">Booking</h4>
                                     <form class="booking-form" action="book_package.php" method="POST">
