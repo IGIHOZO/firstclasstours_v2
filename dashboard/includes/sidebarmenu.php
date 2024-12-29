@@ -46,9 +46,8 @@
             <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Additions </span>  <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
                 <ul id="menu-academico-sub" > 
                     <li id="menu-academico-avaliacoes" ><a href="about_image.php">About Images</a></li>
-                    <!-- <li id="menu-academico-avaliacoes" ><a href="background_image.php">Backgound Image</a></li>
-                    <li id="menu-academico-avaliacoes" ><a href="mission-image.php">Mission Image</a></li>
-                    <li id="menu-academico-avaliacoes" ><a href="vision-image.php">Vision Image</a></li> -->
+                    <li id="menu-academico-avaliacoes" ><a href="welcome_image.php">Welcome Images</a></li>
+
                 </ul>
             </li>
             <li><a href="website_setting.php"><i class="fa fa-table"></i>  <span>Website Settings</span><div class="clearfix"></div></a></li>

@@ -1,4 +1,7 @@
-<?php include("dashboard/includes/config.php");   ?>
+<?php include("dashboard/includes/config.php"); 
+$con = $dbh; // Assuming this is a valid PDO connection
+
+?>
 <!doctype html>
 <html lang="en">
 
@@ -123,16 +126,58 @@
                     ?>
                     
                     <div class="row align-items-center">
-                        <div class="col-lg-7">
-                            <div style="font-size: 16px; line-height: 1.8; color: #555; text-align: justify;">
-                                <?= $welcomeMessage ?>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="section-disc text-center">
-                                <img src="<?= $welcomeImage ?>" alt="Welcome Image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                            </div>
-                        </div>
+                    <div class="col-lg-7">
+    <div style="font-size: 16px; line-height: 1.8; color: #555; text-align: justify; height: 300px; overflow-y: auto; padding-right: 10px; scrollbar-width: thin; scrollbar-color: #888 #f1f1f1;">
+        <?= $welcomeMessage ?>
+    </div>
+</div>
+
+<?php
+// Fetch all active images from the WelcomeImages table
+try {
+    $query = "SELECT ImagePath FROM WelcomeImages WHERE ImageStatus = 1 ORDER BY RAND()";
+    $stmt = $con->prepare($query);
+    $stmt->execute();
+
+    // Fetch all image paths
+    $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    $images = []; // Fallback in case of an error
+}
+?>
+
+<!-- HTML Section -->
+<div class="col-lg-5">
+    <div class="section-disc text-center" style="position: relative; overflow: hidden; width: 100%; height: auto;">
+        <div id="image-slider" style="display: flex; transition: transform 1s ease-in-out;">
+            <?php if (!empty($images)): ?>
+                <?php foreach ($images as $image): ?>
+                    <img src="<?= htmlspecialchars('dashboard/' . $image['ImagePath']) ?>" 
+                         alt="Welcome Image" 
+                         style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-right: 10px;">
+                <?php endforeach; ?>
+            <?php else: ?>
+                <img src="/images/default.png" 
+                     alt="Welcome Image" 
+                     style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript for sliding effect -->
+<script>
+    const slider = document.getElementById('image-slider');
+    const images = slider.children;
+    let index = 0;
+
+    setInterval(() => {
+        index = (index + 1) % images.length; // Loop back to the first image
+        slider.style.transform = `translateX(-${index * images[0].clientWidth}px)`;
+    }, 3000); // Change slide every 3 seconds
+</script>
+
+
                     </div>
                 </div>
             </section>
