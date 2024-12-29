@@ -93,6 +93,25 @@
     color: #666; /* Muted text color */
     margin: 0; /* Remove default margins */
 }
+.site-breadcrumb {
+    background: none !important;  /* Ensure the background image is removed */
+    margin-bottom: -11%;
+}
+@media (max-width: 767px) {
+    .site-breadcrumb {
+    background: none !important;  /* Ensure the background image is removed */
+    margin-bottom: -26%;
+}
+}
+
+/* Tablet-specific adjustments */
+@media (max-width: 1024px) and (min-width: 768px) {
+    .site-breadcrumb {
+    background: none !important;  /* Ensure the background image is removed */
+    margin-bottom: -26%;
+}
+}
+
 </style>
 <?php  
 ini_set('display_errors', 1);
