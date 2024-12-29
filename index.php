@@ -97,45 +97,46 @@
             </div>
             </form>
             <!-- search search field html end -->
-            <section class="destination-section">
-            <div class="container">
-            <div class="section-heading">
-
-            <center><h2>WELCOME MESSAGE</h2></center>
-            <?php
-
-// Fetch the welcome content from the database
-$query = "SELECT * FROM welcome_content ORDER BY id DESC LIMIT 1";
-$result = mysqli_query($conn, $query);
-$welcomeMessage = "";
-$welcomeImage = "";
-
-if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_assoc($result);
-    $welcomeMessage = nl2br(htmlspecialchars($row['welcome_message'])); // Convert newlines to <br> for proper rendering
-    $welcomeImage = htmlspecialchars($row['welcome_image']);
-} else {
-    // Default content if no data is found
-    $welcomeMessage = "";
-    $welcomeImage = "";
-}
-?>
-
-<div class="row align-items-end">
-    <div class="col-lg-7">
-        <span><?= $welcomeMessage ?></span>
-    </div>
-    <div class="col-lg-5">
-        <div class="section-disc">
-            <img src="<?= $welcomeImage ?>" alt="Welcome Image" style="max-width: 100%; height: auto;">
-        </div>
-    </div>
-</div>
-
+            <section class="destination-section" style="padding: 60px 0; background-color: #f9f9f9;">
+                <div class="container">
+                    <div class="section-heading text-center mb-5">
+                        <h2 style="font-size: 36px; font-weight: 700; color: #333;">Welcome to FirstClassTours</h2>
+                        <p style="font-size: 18px; color: #777; margin-top: 10px;">Experience the world in style with unforgettable journeys and unparalleled comfort.</p>
                     </div>
+                    
+                    <?php
+                    // Fetch the welcome content from the database
+                    $query = "SELECT * FROM welcome_content ORDER BY id DESC LIMIT 1";
+                    $result = mysqli_query($conn, $query);
+                    $welcomeMessage = "";
+                    $welcomeImage = "";
 
-</div>
-</section>
+                    if (mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_assoc($result);
+                        $welcomeMessage = nl2br(htmlspecialchars($row['welcome_message'])); // Convert newlines to <br> for proper rendering
+                        $welcomeImage = htmlspecialchars($row['welcome_image']);
+                    } else {
+                        // Default content if no data is found
+                        $welcomeMessage = "Welcome to FirstClassTours! We take pride in curating the finest travel experiences tailored to your needs.";
+                        $welcomeImage = "assets/img/default_welcome_image.jpg"; // Add a default image path
+                    }
+                    ?>
+                    
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <div style="font-size: 16px; line-height: 1.8; color: #555; text-align: justify;">
+                                <?= $welcomeMessage ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="section-disc text-center">
+                                <img src="<?= $welcomeImage ?>" alt="Welcome Image" style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
 
 
@@ -272,110 +273,83 @@ $package_price = (float)$package_price;
 
 
                     <div class="destination-inner destination-three-column">
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="row">
+    <div class="row">
+        <?php
+        $sql3a = "SELECT * FROM destination, countries WHERE countries.country_id = destination.category ORDER BY destination_id";
+        $result3a = $conn->query($sql3a);
+        $counter = 0;
 
-                                <?php
-                $sql3a = "SELECT * FROM destination,countries where countries.country_id=destination.category order by destination_id desc limit 2";
- $result3a = $conn->query($sql3a);
- while ($row3a = $result3a->fetch_assoc()) {
-    $destination_name = $row3a['name'];
-    $country_name = $row3a['country_name'];
-    $description=$row3a['description'];
-    $country_id=$row3a['country_id'];
- 
-    $destination_image =  "assets/img/uploads/destination/".$row3a['image'];
+?>
+<div class="destination-inner destination-three-column">
+    <div class="row">
+        <?php
+        $sql3a = "SELECT * FROM destination, countries WHERE countries.country_id = destination.category ORDER BY destination_id";
+        $result3a = $conn->query($sql3a);
+        $counter = 0;
 
+        while ($row3a = $result3a->fetch_assoc()) {
+            $destination_name = $row3a['name'];
+            $country_name = $row3a['country_name'];
+            $description = $row3a['description'];
+            $country_id = $row3a['country_id'];
+            $destination_image = "assets/img/uploads/destination/" . $row3a['image'];
 
-    ?>
-    <a href="country.php?country_id=<?php  echo $country_id;  ?>">
+            // Open a new row for every two cards
+            // if ($counter % 2 === 0) {
+            //     echo '<div class="row">';
+            // }
+        ?>
 
-                                 
-
-
-
-
-                                    <div class="col-md-6 col-xl-12">
-                                        <div class="desti-item overlay-desti-item">
-                                            <figure class="desti-image">
-                                                <img src="<?php echo $destination_image; ?>" alt="">
-                                            </figure>
-                                            <div class="meta-cat bg-meta-cat">
-                                            <a href="country.php?country_id=<?php  echo $country_id;  ?>">
-                                               <?php  echo $destination_name;   ?>
- </a>
-                                            </div>
-                                            <div class="desti-content">
-                                                <h3>
-                                                    <?php  echo $description;   ?>
-                                                </h3>
-                                             
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    </a>        
-                                    <?php  } ?>
-                              
-                                
-
-
-
-
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="row">
-
-
-
-
-                                <?php
-                $sql3a = "SELECT * FROM destination,countries where countries.country_id=destination.category
-                 order by destination_id desc limit 2 OFFSET 2";
- $result3a = $conn->query($sql3a);
- while ($row3a = $result3a->fetch_assoc()) {
-    $destination_name = $row3a['name'];
-    $country_name = $row3a['country_name'];
-    $description=$row3a['description'];
-    $country_id=$row3a['country_id'];
- 
-    $destination_image =  "assets/img/uploads/destination/".$row3a['image'];
-
-
-    ?>
-    <a href="country.php?country_id=<?php  echo $country_id;  ?>">
-
-
-
-                                    <div class="col-md-6 col-xl-12">
-                                        <div class="desti-item overlay-desti-item">
-                                            <figure class="desti-image">
-                                                <img src="<?php echo $destination_image; ?>" alt="">
-                                            </figure>
-                                            <div class="meta-cat bg-meta-cat">
-                                            <a href="country.php?country_id=<?php  echo $country_id;  ?>">
-                                            <?php  echo $destination_name;   ?>
-                                            <a>
-                                            </div>
-                                            <div class="desti-content">
-                                                <h3>
-                                                   <?php  echo $description;   ?>
-                                                </h3>
-                                             
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                      </a>        
-                                    <?php  } ?>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                
+        <div class="col-lg-6 mb-6">
+            <a href="country.php?country_id=<?php echo $country_id; ?>" style="text-decoration: none; color: inherit;">
+                <div class="desti-item overlay-desti-item" style="position: relative; overflow: hidden; border-radius: 8px;">
+                    <!-- Image Section -->
+                    <figure class="desti-image" style="margin: 0; overflow: hidden;">
+                        <img src="<?php echo $destination_image; ?>" alt="" style="width: 130%; height: 300px; display: block; object-fit: cover;">
+                    </figure>
+                    <!-- Meta Section -->
+                    <div class="meta-cat bg-meta-cat" style="background: #007bff; color: white; padding: 10px; text-align: center; font-weight: bold;">
+                        <?php echo $destination_name; ?>
                     </div>
+                    <!-- Content Section -->
+                    <div class="desti-content" style="padding: 15px; text-align: justify; background: #f9f9f9;">
+                        <p style="font-size: 14px; color: #333; margin: 0;">
+                            <?php echo nl2br(htmlspecialchars(substr($description, 0, 150))); ?>
+                            <?php if (strlen($description) > 150) { ?>
+                                <span style="color: #007bff; text-decoration: none;">Read More...</span>
+                            <?php } ?>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <?php
+            $counter++;
+            // Close the row after every two cards
+            // if ($counter % 2 === 0) {
+            //     echo '</div>';
+            // }
+        }
+
+        // Close any open row
+        if ($counter % 2 !== 0) {
+            echo '</div>';
+        }
+        ?>
+    </div>
+</div>
+
+<?php
+
+        // Close any open row
+        if ($counter % 2 !== 0) {
+            echo '</div>';
+        }
+        ?>
+    </div>
+</div>
+
                 </div>
             </section>
 

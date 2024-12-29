@@ -1,9 +1,14 @@
 <?php 
 
+// define('DB_HOST','localhost');
+// define('DB_USER','firstclasstours_new_user_newsite');
+// define('DB_PASS','#kd)0c0+ZGC[');
+// define('DB_NAME','firstclasstours_new_website');
+
 define('DB_HOST','localhost');
-define('DB_USER','firstclasstours_new_user_newsite');
-define('DB_PASS','#kd)0c0+ZGC[');
-define('DB_NAME','firstclasstours_new_website');
+define('DB_USER','root');
+define('DB_PASS','Igihozo!#07');
+define('DB_NAME','firstclasstours');
 
 try
 {
@@ -13,12 +18,15 @@ catch (PDOException $e)
 {
 exit("Error: " . $e->getMessage());
 }
-
+// $servername = "localhost";
+// $username = "firstclasstours_new_user_newsite";
+// $password = "#kd)0c0+ZGC[";
+// $dbname = "firstclasstours_new_website";
 
 $servername = "localhost";
-$username = "firstclasstours_new_user_newsite";
-$password = "#kd)0c0+ZGC[";
-$dbname = "firstclasstours_new_website";
+$username = "root";
+$password = "Igihozo!#07";
+$dbname = "firstclasstours";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);

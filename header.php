@@ -52,7 +52,11 @@
                                     <a href="index.php">Home</a>
                                   
                                 </li>
-                                <li class="menu-item-has-children">
+                                <li class="menu-item">
+                                    <a href="about.php">About Us</a>
+                                  
+                                </li>
+                                <!-- <li class="menu-item-has-children">
                                     <a href="#">About</a>
                                     <ul>
 
@@ -73,7 +77,7 @@
                                       
                                       
                                     </ul>
-                                </li>
+                                </li> -->
                                 <li class="menu-item-has-children">
     <a href="#">Destinations</a>
     <ul>
@@ -134,7 +138,7 @@
 
 
                             
-                               
+<!--                                
                                 <li class="menu-item-has-children">
                                     <a href="#"> Info </a>
                                     <ul>
@@ -150,7 +154,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> -->
 
                                 <li class="menu-item-has-children">
                                     <a href="#">Book</a>

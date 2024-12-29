@@ -68,8 +68,11 @@ if (mysqli_num_rows($q) > 0) {
         $visa_in_rwanda = $row['visa_in_rwanda'];
         $become_rwanda_resident = $row['become_rwanda_resident'];
         $become_rwanda_citizen = $row['become_rwanda_citizen'];
-     
-      
+
+        $AboutImage = $row['AboutImage'];
+        $BackgroundImage = $row['BackgroundImage'];
+        $MissionImage = $row['MissionImage'];
+        $VisionImage = $row['VisionImage'];
     }}
     
 ?>
