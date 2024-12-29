@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-
-<style>
     .country-info-list {
         list-style: none; /* Remove default bullets */
         padding: 0;       /* Remove padding */
@@ -95,10 +93,6 @@
     color: #666; /* Muted text color */
     margin: 0; /* Remove default margins */
 }
-</style>
-
-
-
 </style>
 <?php  
 ini_set('display_errors', 1);
