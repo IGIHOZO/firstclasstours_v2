@@ -23,6 +23,7 @@
                         <div class="col-lg-4 d-flex justify-content-lg-end justify-content-between">
                             <div class="header-social social-links">
                                 <ul>
+
                                     <li><a href="<?php  echo $facebook_link; ?>"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
                                     <li><a href="<?php  echo $x_link; ?>"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
                                     <li><a href="<?php  echo $instagram_link; ?>"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
@@ -56,28 +57,7 @@
                                     <a href="about.php">About Us</a>
                                   
                                 </li>
-                                <!-- <li class="menu-item-has-children">
-                                    <a href="#">About</a>
-                                    <ul>
 
-                             
-
-                                        <li>
-                                            <a href="aboutus.php">About Us</a>
-                                        </li>
-                                        <li>
-                                            <a href="our_background.php">Our Background</a>
-                                        </li>
-                                        <li>
-                                            <a href="mission.php">Our Mission</a>
-                                        </li>
-                                        <li>
-                                            <a href="vision.php">Our Vision</a>
-                                        </li>
-                                      
-                                      
-                                    </ul>
-                                </li> -->
                                 <li class="menu-item-has-children">
     <a href="#">Destinations</a>
     <ul>
@@ -156,7 +136,7 @@
                                     </ul>
                                 </li> -->
 
-                                <li class="menu-item-has-children">
+                                <!-- <li class="menu-item-has-children">
                                     <a href="#">Book</a>
                                     <ul>
                                         <li>
@@ -170,28 +150,13 @@
                                        
                                     
                                     </ul>
-                                </li>
+                                </li> -->
 
                                 <li class="menu-item">
-                                    <a href="User_dashboard/">Login</a>
-                                    <!-- <ul>
-                                        <li>
-                                            <a href="User_dashboard/">User Dashboard Login</a>
-                                        </li>
-                                      
-                                        <li>
-                                            <a href="tour_companies.php">Registered Tour Companies</a>
-                                        </li>
-                                       
-                                        <li>
-                                            <a href="transport_companies.php">Registered Transport Companies</a>
-                                        </li>
-
-                                        <li>
-                                            <a href="hotels.php">Best Registered Hotels</a>
-                                        </li>
-                                    
-                                    </ul> -->
+                                    <a href="car_rental.php">Car Hiring</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="hotel_booking.php">Hotels</a>
                                 </li>
 
 
@@ -205,6 +170,9 @@
                     <div class="header-btn">
                         <a href="register_company.php" class="button-primary">Register Your Company</a>
                     </div>
+                    <li class="menu-item">
+                                        <a href="User_dashboard/"><b style="font-weight: bolder;font-style:underline;color:white">Login</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </li>
                 </div>
             </div>
             <div class="mobile-menu-container"></div>

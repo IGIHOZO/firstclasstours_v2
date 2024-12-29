@@ -48,6 +48,7 @@
                     <li id="about_image" ><a href="about_image.php">About Images</a></li>
                     <li id="welcome_image" ><a href="welcome_image.php">Welcome Images</a></li>
                     <li id="package_discount" ><a href="package_discount.php">Package Discounts</a></li>
+                    <li id="itineraries_image" ><a href="itineraries_image.php">Itineraries Images</a></li>
                     
 
                 </ul>

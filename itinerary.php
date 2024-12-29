@@ -263,10 +263,10 @@ if ($result->num_rows > 0) {
                                             <a class="nav-link active" id="overview-tab" data-toggle="tab" href="#overview" role="tab" aria-controls="overview" aria-selected="true">Tour Overview</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="program-tab" data-toggle="tab" href="#program" role="tab" aria-controls="program" aria-selected="false">Included And Excluded</a>
+                                            <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Tour Plan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review" aria-selected="false">Tour Plan</a>
+                                            <a class="nav-link" id="program-tab" data-toggle="tab" href="#program" role="tab" aria-controls="program" aria-selected="false">Included And Excluded</a>
                                         </li>
                                         <!-- <li class="nav-item">
                                             <a class="nav-link" id="map-tab" data-toggle="tab" href="#map" role="tab" aria-controls="map" aria-selected="false">Map</a>
@@ -274,17 +274,13 @@ if ($result->num_rows > 0) {
                                     </ul>
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
-                                            <div class="overview-content">
-                                            <div style="white-space: pre-wrap;">
-                                           
-                        <p class="mt-20">
-                       
-                        <?php  echo $package_description;   ?>
-                        </p></div>
-                                              
-                                            
+                                            <div class="overview-content" style="white-space: pre-wrap;">
+                                                <p class="mt-20" style="margin-top: -14%; padding-top: 0;">
+                                                    <?php echo $package_description; ?>
+                                                </p>
                                             </div>
                                         </div>
+
                                         <div class="tab-pane" id="program" role="tabpanel" aria-labelledby="program-tab">
                                             <div class="itinerary-content">
                                                
@@ -400,6 +396,7 @@ $no=0;
 $itinerary_title = "NO data available for now";
 $itinerary_day_time_plan = "NO data available for now";
 $itinerary_day_full_description = "NO data available for now";
+$itinerary_image = "No Image Available";
 $sql33a = "SELECT * FROM itineraries,packages where itineraries.package_id=packages.package_id
 and package_status='1' and itineraries.package_id='$posted_package_id'";
 $result33a = $conn->query($sql33a);
@@ -407,18 +404,26 @@ while ($row33a = $result33a->fetch_assoc()) {
 $itinerary_title= $row33a['title'];
 $itinerary_day_time_plan= $row33a['day_time_plan'];
 $itinerary_day_full_description= $row33a['day_full_description'];
+$itinerary_image = $row33a['itinerariesImage'];
 
 $no=$no+1;
 
 ?>
 
-<div class="tour-single-box">
-        <span><?php  echo $no; ?></span>
-        <h4><?php  echo $itinerary_day_time_plan; ?></h4>
-        <h3><?php  echo $itinerary_title; ?></h3>
-        <p><?php  echo $itinerary_day_full_description; ?></p>
-       
+<div class="tour-single-box" style="border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 8px; overflow: hidden;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <div style="flex-shrink: 0; width: 150px; height: 150px; overflow: hidden; border-radius: 8px;">
+            <img src="dashboard/<?= htmlspecialchars($itinerary_image) ?>" alt="No Image Available" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="flex: 1;">
+            <span style="display: block; font-size: 1.2em; font-weight: bold; color: #555;"><?= htmlspecialchars($no) ?></span>
+            <h4 style="margin: 5px 0; font-size: 1.5em; color: #333;"><?= htmlspecialchars($itinerary_day_time_plan) ?></h4>
+            <h3 style="margin: 5px 0; font-size: 1.3em; color: #666;"><?= htmlspecialchars($itinerary_title) ?></h3>
+            <p style="font-size: 1em; color: #777;"><?= htmlspecialchars($itinerary_day_full_description) ?></p>
+        </div>
     </div>
+</div>
+
 
 <?php
 
