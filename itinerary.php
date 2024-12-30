@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    .country-info-list {
+    #main-menus{
+        background-color: #2B4F39!important;
+        color: white!important;
+    }    .country-info-list {
         list-style: none; /* Remove default bullets */
         padding: 0;       /* Remove padding */
         margin: 0;        /* Remove margin */
@@ -462,10 +465,13 @@ $no=$no+1;
                                     </h6>
                                 <?php endif; ?></h4>
                             </div>
-
+<?php 
+$intPrice = (int)$package_price;
+?>
                                 <div class="widget-bg booking-form-wrap">
                                     <h4 class="bg-title">Booking</h4>
                                     <form class="booking-form" action="book_package.php" method="POST">
+                                        <input type="hidden" value="<?=$intPrice?>" name="packagePrice">
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
@@ -508,7 +514,7 @@ $no=$no+1;
                                           
                                             <div class="col-sm-12">
                                                 <div class="form-group submit-btn">
-                                                    <input type="submit" name="submit" value="Boook Now">
+                                                    <input type="submit" name="submit" value="Book Now">
                                                 </div>
                                             </div>
                                         </div>

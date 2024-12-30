@@ -30,6 +30,19 @@
                     <li id="menu-academico-avaliacoes" ><a href="manage_inclusion.php">Manage</a></li>
                 </ul>
             </li>
+            <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Additions </span>  <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
+                <ul id="menu-academico-sub" > 
+                    <li id="about_image" ><a href="about_image.php">About Images</a></li>
+                    <li id="welcome_image" ><a href="welcome_image.php">Welcome Images</a></li>
+                    <li id="package_discount" ><a href="package_discount.php">Package Discounts</a></li>
+                    <li id="itineraries_image" ><a href="itineraries_image.php">Itineraries Images</a></li>
+                    <li id="attractions" ><a href="attractions.php">Attractions</a></li>
+                    <li id="sub-attractions" ><a href="sub-attractions.php">Sub-Attractions</a></li>
+
+                    
+
+                </ul>
+            </li>
             <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Packages Iteneraries </span>  <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
                 <ul id="menu-academico-sub" >
                     <li id="menu-academico-avaliacoes" ><a href="admin-create-itenerary.php">Create New </a></li>
@@ -41,16 +54,6 @@
                     <li id="menu-academico-avaliacoes" ><a href="view_tour_companies.php">Tour Companies</a></li>
                     <li id="menu-academico-avaliacoes" ><a href="view_transport_companies.php">Transport Companies</a></li>
                     <li id="menu-academico-avaliacoes" ><a href="view_hotels.php">Hotels</a></li>
-                </ul>
-            </li>
-            <li id="menu-academico" ><a href="#"><i class="fa fa-list-ul" aria-hidden="true"></i><span> Additions </span>  <span class="fa fa-angle-right" style="float: right"></span><div class="clearfix"></div></a>
-                <ul id="menu-academico-sub" > 
-                    <li id="about_image" ><a href="about_image.php">About Images</a></li>
-                    <li id="welcome_image" ><a href="welcome_image.php">Welcome Images</a></li>
-                    <li id="package_discount" ><a href="package_discount.php">Package Discounts</a></li>
-                    <li id="itineraries_image" ><a href="itineraries_image.php">Itineraries Images</a></li>
-                    
-
                 </ul>
             </li>
             <li><a href="website_setting.php"><i class="fa fa-table"></i>  <span>Website Settings</span><div class="clearfix"></div></a></li>

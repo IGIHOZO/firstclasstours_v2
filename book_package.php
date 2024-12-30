@@ -17,6 +17,7 @@ if (isset($_POST['submit'])) {
     $comment = $_POST['comment'];
     $package_id = $_POST['package_id'];
     $date = $_POST['s'];
+    $packagePrice = $_POST['packagePrice'];
 
     // Send Email with PHPMailer
     $mail = new PHPMailer(true);
@@ -37,7 +38,7 @@ if (isset($_POST['submit'])) {
 
         // Email content
         $mail->isHTML(true);
-        $mail->Subject = 'New Pckage Booking Submission';
+        $mail->Subject = 'New Package Booking Submission';
         $mail->Body = "
             <h2>New Booking Received</h2>
             <p><strong>Package:</strong> $package</p>
@@ -50,15 +51,23 @@ if (isset($_POST['submit'])) {
 
         // Send the email
         $mail->send();
-        echo "<script>
-                alert('Package Booking submitted successfully! We will be in contact with you very soon.');
-                window.location.href = 'index.php'; // Redirect to a thank you page
+        echo "<script>alert('Your Bookong successfully recorded. Please Proceed with payment.')</script>";
+        // Redirect using POST
+        echo "<form id='redirectForm' method='POST' action='proceed-to-pay.php'>
+                <input type='hidden' name='packageId' value='" . htmlspecialchars($package_id, ENT_QUOTES) . "'>
+                <input type='hidden' name='totalPrice' value='" . htmlspecialchars($packagePrice, ENT_QUOTES) . "'>
+              </form>
+              <script>
+                  document.getElementById('redirectForm').submit();
               </script>";
+        exit; // Stop execution after sending the response
     } catch (Exception $e) {
-        echo "<script>
-                alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}');
-                window.location.href = 'itinerary.php?packageID=<?php echo $package_id; ?>'; // Redirect back to the form page
-              </script>";
+        echo "
+        <script>
+            alert('Message could not be sent. Mailer Error: {$mail->ErrorInfo}');
+            window.location.href = 'itinerary.php?packageID=$package_id'; // Redirect back to the form page
+        </script>";
+        exit;
     }
 }
 ?>
