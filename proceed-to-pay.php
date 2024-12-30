@@ -26,7 +26,7 @@ echo "</div>";
                         <input type="hidden" name="app_secret" value="JDJ5JDEwJEZHTk1o">
                         
                         <div class="text-center mb-4">
-                            <p><strong>Total Amount: RWF <?=$_POST['totalPrice']?></strong></p>
+                            <p><strong>Total Amount: $ <?=number_format($_POST['totalPrice'], 2)?></strong></p>
                         </div>
 
                         <div class="text-center">

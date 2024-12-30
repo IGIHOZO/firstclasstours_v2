@@ -49,7 +49,7 @@ CREATE TABLE `admin` (
   `name` varchar(50) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`admin_email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `admin` (`admin_email`, `name`, `password`) VALUES
 ('admin@firstclasstours.rw',	'Akingeney Alphonse',	'21232f297a57a5a743894a0e4a801fc3');
@@ -66,7 +66,7 @@ CREATE TABLE `Attractions` (
   PRIMARY KEY (`AttractionID`),
   KEY `fk_AttractionDestination` (`AttractionDestinationID`),
   CONSTRAINT `fk_AttractionDestination` FOREIGN KEY (`AttractionDestinationID`) REFERENCES `destination` (`destination_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `Attractions` (`AttractionID`, `AttractionDestinationID`, `AttractionTitle`, `AttractionImage`, `AttractionDescription`, `AttractionStatus`, `AttractionTimeCreated`) VALUES
 (1,	2,	'efwds',	'images/attractions/wall.jpeg',	' dfsvds wewdsvasdzv wefsavcawds ewdsv',	1,	'2024-12-30 09:29:21'),
@@ -88,7 +88,7 @@ CREATE TABLE `car_rental` (
   `car_status` int(11) NOT NULL DEFAULT 1,
   `car_recorded_date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`car_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `car_rental` (`car_id`, `car_name`, `car_price`, `number_of_seat`, `car_year`, `car_fuel_type`, `car_overview`, `car_brand`, `car_main_image`, `car_owner_id`, `car_status`, `car_recorded_date`) VALUES
 (1,	'Toyota land cruiser V8',	'100',	5,	2018,	'Diesel',	'EGTRTERGRGFD',	'Toyota',	'v8.jpeg',	1,	1,	'2024-12-23 15:05:30');
@@ -100,7 +100,7 @@ CREATE TABLE `car_rental_images` (
   `car_rental_other_image` varchar(100) NOT NULL,
   `car_rental_image_recorded_date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`car_rental_image_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `car_rental_images` (`car_rental_image_id`, `car_rental_id`, `car_rental_other_image`, `car_rental_image_recorded_date`) VALUES
 (3,	1,	'toyota1.jpg',	'2024-12-20 12:45:01'),
@@ -125,7 +125,7 @@ CREATE TABLE `car_rental_inclusive` (
   `Passenger_Airbag` int(11) NOT NULL DEFAULT 1,
   `Crash_Sensor` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`car_inclusive_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `car_rental_inclusive` (`car_inclusive_id`, `car_id`, `Air_Conditioner`, `AntiLock_Braking_System`, `Power_Steering`, `Power_Windows`, `CD_Player`, `Leather_Seats`, `Central_Locking`, `Power_Door_Locks`, `Brake_Assist`, `Driver_Airbag`, `Passenger_Airbag`, `Crash_Sensor`) VALUES
 (5,	4,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1,	1),
@@ -138,7 +138,7 @@ CREATE TABLE `car_rental_slider` (
   `car_rental_slider_description` varchar(200) NOT NULL,
   `car_rental_slider_recorded_date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`car_rental_slider_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `car_rental_slider` (`car_rental_slider_id`, `car_rental_slider_image`, `car_rental_slider_description`, `car_rental_slider_recorded_date`) VALUES
 (1,	'slider1.jpg',	'Transport Services ',	'2024-12-09 22:57:53'),
@@ -155,7 +155,7 @@ CREATE TABLE `contact_us` (
   `posting_date` timestamp NULL DEFAULT current_timestamp(),
   `reply` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`enq_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `contact_us` (`enq_id`, `name`, `email`, `mobile_num`, `subject`, `description`, `posting_date`, `reply`) VALUES
 (11,	'jhbjk',	NULL,	NULL,	NULL,	NULL,	'2023-11-21 13:37:37',	NULL);
@@ -166,7 +166,7 @@ CREATE TABLE `countries` (
   `country_name` varchar(100) NOT NULL,
   `active` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`country_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `countries` (`country_id`, `country_name`, `active`) VALUES
 (1,	'Algeria',	0),
@@ -243,7 +243,7 @@ CREATE TABLE `destination` (
   `visa_requirements_document` varchar(100) DEFAULT NULL,
   `country_info` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`destination_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `destination` (`destination_id`, `name`, `category`, `description`, `image`, `city`, `description_full`, `creationdate`, `updationdate`, `visa_required`, `languages_spoken`, `currency_used`, `support_phone`, `support_email`, `country_area`, `visa_requirements_document`, `country_info`) VALUES
 (1,	'RWANDA Destination',	39,	'A land of thousand hills, vibrant culture, and unforgettable wildlife, Rwanda offers a unique blend of natural beauty and rich history, making it the perfect destination for adventure, relaxation, and exploration.',	'file_20241223_124804.jpg',	'Kigali city',	'Rwanda, often called the \"Land of a Thousand Hills,\" is a stunning country nestled in the heart of East Africa. Known for its breathtaking landscapes, Rwanda boasts rolling green hills, lush rainforests, and sparkling lakes. The capital city, Kigali, is the vibrant heart of the country, offering visitors a mix of modernity and tradition with its bustling markets, cultural sites, and rich history.\r\n\r\nRwanda is not just about scenery; itâ€™s also home to some of Africaâ€™s most iconic wildlife, including the endangered mountain gorillas in Volcanoes National Park. Visitors can also explore the savannahs of Akagera National Park, filled with diverse wildlife, or relax on the serene shores of Lake Kivu.\r\n\r\nWhether you are looking to immerse yourself in cultural experiences, embark on thrilling safaris, or simply enjoy the peaceful atmosphere, Rwanda provides an exceptional travel experience that blends nature, adventure, and history seamlessly.',	'2024-12-23 12:48:04',	'2024-12-23 12:48:04',	'Visa on a live',	'Kinyarwanda, English, French, Kiswahili.',	'Francs',	'+250',	'alphonse@firstclasstours.rw',	'26,338km',	'file_20241223_124804.pdf',	'file_20241223_124804.pdf'),
@@ -258,7 +258,7 @@ CREATE TABLE `des_feedback` (
   `tourist_id` int(10) DEFAULT NULL,
   `destination_id` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`feedback_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `driver`;
@@ -275,7 +275,7 @@ CREATE TABLE `driver` (
   `tourist_id` int(10) DEFAULT NULL,
   `RegDate` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`driver_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `driver_feedback`;
@@ -286,7 +286,7 @@ CREATE TABLE `driver_feedback` (
   `tourist_id` int(10) DEFAULT NULL,
   `driver_id` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`fb_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `guide`;
@@ -302,7 +302,7 @@ CREATE TABLE `guide` (
   `languages` varchar(100) DEFAULT NULL,
   `RegDate` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`guide_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `guide_feedback`;
@@ -312,7 +312,7 @@ CREATE TABLE `guide_feedback` (
   `rating` int(11) DEFAULT NULL,
   `tourist_id` int(10) DEFAULT NULL,
   PRIMARY KEY (`fb_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `homepage_logo`;
@@ -368,7 +368,7 @@ CREATE TABLE `hotels` (
   `active` int(11) NOT NULL DEFAULT 0,
   `password` varchar(200) NOT NULL DEFAULT '123',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `hotels` (`id`, `hotel_name`, `owner_name`, `contact_email`, `phone_number`, `hotel_address`, `star_rating`, `room_types`, `checkin_policy`, `hotel_amenities`, `dining_options`, `accessibility_features`, `hotel_certificate`, `hotel_logo`, `created_at`, `active`, `password`) VALUES
 (1,	'Patty hotel',	'TUMUKUNDE IHOGOZA Patience Elina',	'tumukundepatience5@gmail.com',	'+250 783 993 456 ',	'kimironko',	5,	'Single suite',	'10am/11pm',	'WIFI, POOL,....',	'Room services',	'Wheelchair Access',	'1734967270_visa in Rwanda.pdf',	'1734967270_General information of Rwanda.pdf',	'2024-12-23 15:21:10',	0,	'123');
@@ -380,7 +380,7 @@ CREATE TABLE `hotel_booking_slider` (
   `hotel_booking_slider_description` varchar(200) NOT NULL,
   `hotel_booking_slider_recorded_date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`hotel_booking_slider_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `hotel_booking_slider` (`hotel_booking_slider_id`, `hotel_booking_slider_image`, `hotel_booking_slider_description`, `hotel_booking_slider_recorded_date`) VALUES
 (1,	'slider1.jpg',	'Explore Available Rooms Services ',	'2024-12-09 22:57:53'),
@@ -399,7 +399,7 @@ CREATE TABLE `hotel_rooms` (
   `room_status` int(11) NOT NULL DEFAULT 1,
   `room_recorded_date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `hotel_rooms` (`room_id`, `room_name`, `room_price`, `room_type`, `room_hotel_star`, `room_amenities`, `room_main_image`, `hotel_id`, `room_status`, `room_recorded_date`) VALUES
 (4,	'Suite room',	'400',	'Suite',	5,	'TV, WIFI, Mirrors, Boiler,.....',	'Room.webp',	1,	1,	'2024-12-23 15:27:42');
@@ -411,7 +411,7 @@ CREATE TABLE `hotel_room_images` (
   `hotel_room_other_image` varchar(100) NOT NULL,
   `hotel_room_image_recorded_date` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`hotel_room_image_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `itineraries`;
@@ -424,7 +424,7 @@ CREATE TABLE `itineraries` (
   `itinerariesImage` varchar(255) DEFAULT NULL,
   `itinerary_recorded_date` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`itinerary_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `itineraries` (`itinerary_id`, `package_id`, `title`, `day_time_plan`, `day_full_description`, `itinerariesImage`, `itinerary_recorded_date`) VALUES
 (1,	1,	'Day 1: Arrival in Kigali',	'9am to 7pm',	'werfghj',	NULL,	'2024-12-17 03:03:58'),
@@ -694,7 +694,7 @@ CREATE TABLE `offer` (
   `tour_id` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`offer_id`),
   KEY `FK` (`tourist_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `PackageDiscounts`;
@@ -705,7 +705,7 @@ CREATE TABLE `PackageDiscounts` (
   `DiscountStatus` int(11) NOT NULL DEFAULT 1 COMMENT 'Status of Discount (1=Active, 0=Inactive)',
   `DateCreated` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'Date and Time when the Discount was Created',
   PRIMARY KEY (`DiscountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `PackageDiscounts` (`DiscountID`, `DiscountValue`, `DiscountPackageID`, `DiscountStatus`, `DateCreated`) VALUES
 (4,	4.00,	31,	1,	'2024-12-29 21:50:18'),
@@ -737,7 +737,7 @@ CREATE TABLE `packages` (
   `package_recorded_date` varchar(100) DEFAULT NULL,
   `package_company_owner` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`package_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `packages` (`package_id`, `package_name`, `package_introduction`, `package_description`, `package_days_and_nights`, `package_from_date`, `package_to_date`, `package_price`, `package_travel_type`, `package_type`, `package_country`, `package_number_of_person`, `package_image`, `package_status`, `package_recorded_date`, `package_company_owner`) VALUES
 (4,	' The Majestic South Africa Experience',	'Experience the best of South Africa with First Class Toursâ€”8 days of culture, wildlife, and stunning landscapes, including Johannesburg, Kruger National Park, the Cape Peninsula, and Cape Town\'s iconic sights.',	'The Majestic South Africa Experience\r\nEmbark on an 8-day luxury tour through South Africa, exploring Johannesburg, Kruger National Park, the Cape Peninsula, and Cape Town. Enjoy safaris, cultural experiences, and stunning landscapes.',	'8 days/7 nights.',	'',	'',	'3,500',	'1',	'1',	45,	'3',	'file_20241223_111507.jpg',	1,	'2024-12-23 13:15:08',	0),
@@ -794,7 +794,7 @@ CREATE TABLE `package_inclusive` (
   `additional_service` varchar(200) DEFAULT NULL,
   `recorded_date` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`package_inclusive_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `package_inclusive` (`package_inclusive_id`, `package_id`, `tour_plan`, `departure_location`, `return_location`, `departure_time`, `bed_room`, `air_fares`, `hotel`, `entrance_fees`, `tour_guide`, `insurance`, `food_and_drinks`, `additional_service`, `recorded_date`) VALUES
 (2,	2,	'Price Includes:\r\n\r\nAirport transfers and ground transportation in a 4x4 safari vehicle\r\nAccommodation based on chosen package\r\nPark entry fees and permit fees (gorilla trekking permits $1,500 included)\r\nMeals as listed in the itinerary\r\nProfessional English-speaking guide\r\nActivities listed in the itinerary\r\nPrice Excludes:\r\n\r\nInternational flights\r\nVisas and personal expenses\r\nTravel insurance\r\nOptional activities not included in the itinerary\r\n',	'kigali',	'KIGALI',	'7pm',	'',	'Yes',	'Yes',	'Yes',	'Yes',	'Yes',	'Yes',	'',	'2024-12-17 03:21:18'),
@@ -863,7 +863,7 @@ CREATE TABLE `SubAttractions` (
   PRIMARY KEY (`SubID`),
   KEY `AttractionID` (`AttractionID`),
   CONSTRAINT `SubAttractions_ibfk_1` FOREIGN KEY (`AttractionID`) REFERENCES `Attractions` (`AttractionID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `SubAttractions` (`SubID`, `AttractionID`, `SubTitle`, `SubDescriptions`, `SubImage`, `SubStatus`, `SubTimeCreated`) VALUES
 (1,	2,	'Bisoke Crator Lake',	'kjlkvdsklj vsdlnk kl sdln vsdl kjlkvdsklj vsdlnk kl sdln vsdl kjlkvdsklj vsdlnk kl sdln vsdl ',	'images/subattractions/bisoke.jpg',	1,	'2024-12-30 11:51:09'),
@@ -886,7 +886,7 @@ CREATE TABLE `tour` (
   PRIMARY KEY (`tour_id`),
   KEY `email` (`email`),
   CONSTRAINT `tour_ibfk_1` FOREIGN KEY (`email`) REFERENCES `tourist` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `tourist`;
@@ -902,7 +902,7 @@ CREATE TABLE `tourist` (
   `languages` varchar(100) DEFAULT NULL,
   `RegDate` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `tourist_destination`;
@@ -913,7 +913,7 @@ CREATE TABLE `tourist_destination` (
   PRIMARY KEY (`email`,`destination_id`) USING BTREE,
   KEY `tourist_destination_ibfk_2` (`destination_id`),
   CONSTRAINT `tourist_destination_ibfk_2` FOREIGN KEY (`destination_id`) REFERENCES `destination` (`destination_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `tours_company`;
@@ -934,7 +934,7 @@ CREATE TABLE `tours_company` (
   `active` int(11) NOT NULL DEFAULT 0,
   `password` varchar(200) NOT NULL DEFAULT '123',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `transaction`;
@@ -949,7 +949,7 @@ CREATE TABLE `transaction` (
   `reciever_type` varchar(100) NOT NULL,
   `completed` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`transaction_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 DROP TABLE IF EXISTS `transport_companies`;
@@ -969,7 +969,7 @@ CREATE TABLE `transport_companies` (
   `active` int(11) NOT NULL DEFAULT 0,
   `password` varchar(200) NOT NULL DEFAULT '123',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `transport_companies` (`id`, `company_name`, `owner_name`, `contact_email`, `phone_number`, `company_address`, `fleet_size`, `type_of_vehicles`, `licence_number`, `company_certificate`, `company_logo`, `created_at`, `active`, `password`) VALUES
 (1,	'Rwanda Luxury Car',	'TUMUKUNDE IHOGOZA Patience Elina',	'tumukundepatience5@gmail.com',	'+250 783 993 456',	'kimironko',	'6',	'Luxury Cars',	'1233',	'1734965917_visa in Rwanda.pdf',	'1734965917_images.jpeg',	'2024-12-23 14:58:37',	0,	'123');
@@ -1001,7 +1001,7 @@ CREATE TABLE `vehicle` (
   `vehical_model` varchar(255) NOT NULL,
   PRIMARY KEY (`vehi_registration_number`),
   UNIQUE KEY `vehi_id` (`vehi_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `vehicle` (`vehi_id`, `vehi_registration_number`, `ac/nonac`, `no_of_seats`, `vehicle_type`, `driver_id`, `vehical_mark`, `vehical_model`) VALUES
 (NULL,	'HS-0441',	NULL,	NULL,	'',	'drivertest',	'nissan',	'fb15');
@@ -1013,7 +1013,7 @@ CREATE TABLE `WelcomeImages` (
   `ImageStatus` tinyint(1) NOT NULL COMMENT 'Status of the image (0=inactive, 1=active)',
   `ImageTime` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Time the image was uploaded',
   PRIMARY KEY (`ImageID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `WelcomeImages` (`ImageID`, `ImagePath`, `ImageStatus`, `ImageTime`) VALUES
 (2,	'images/welcome/1735499571_67719f33ba5dd.png',	1,	'2024-12-29 19:12:51'),
@@ -1029,7 +1029,7 @@ CREATE TABLE `welcome_content` (
   `welcome_image` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `welcome_content` (`id`, `welcome_message`, `welcome_image`, `created_at`) VALUES
 (1,	'At First Class Tours, we transform dreams into unforgettable journeys. As a premier leader in the tourism industry, we specialize in delivering extraordinary experiences that connect you with the heart of Africa\'s beauty, culture, and wildlife.\r\n\r\nWhether you\'re seeking the thrill of Rwandaâ€™s majestic landscapes, the serenity of luxury retreats, or the richness of authentic cultural encounters, we are here to guide you every step of the way. Our dedicated team ensures that every journey is meticulously crafted, reflecting our commitment to excellence, sustainability, and personalized service.\r\n\r\nStep into a world where adventure meets luxury, and every moment is designed to leave an everlasting impression. Explore with us, experience with us, and let First Class Tours be your gateway to the wonders of Africa and beyond.\r\n\r\nWelcome to the journey of a lifetime',	'../uploads/welcome_message/1710703842119.jpg',	'2024-12-24 02:54:09');
