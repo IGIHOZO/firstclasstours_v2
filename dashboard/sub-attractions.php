@@ -7,11 +7,17 @@ error_reporting(E_ALL);
 require('./dashboardredirect.php');
 $con = $dbh; // Assuming this is a valid PDO connection
 
+// Function to sanitize input and remove unwanted characters (including emojis)
+function sanitize_input($input) {
+    // Remove any non-ASCII characters (i.e., emojis and other special characters)
+    return preg_replace('/[^\x20-\x7E]/', '', $input); // Keeps only ASCII characters
+}
+
 // Handle POST request for adding a SubAttraction
 if (isset($_POST['add_subattraction'])) {
     $attraction_id = (int)$_POST['attraction_id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
+    $title = sanitize_input($_POST['title']);  // Sanitize title
+    $description = sanitize_input($_POST['description']);  // Sanitize description
     $status = 1; // Always active
     $image = $_FILES['subattraction_image'];
 
@@ -198,6 +204,7 @@ $subattractions = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $('#subattractions-table').DataTable();
         });
     </script>
+
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

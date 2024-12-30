@@ -17,13 +17,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Function to handle adding a new attraction
+// Function to handle adding a new attraction
 function handleAddAttraction($con)
 {
     $destination_id = (int)$_POST['destination_id'];
-    $title = $_POST['title'];
-    $description = $_POST['description'];
+    $title = sanitizeInput($_POST['title']);
+    $description = sanitizeInput($_POST['description']);
     $status = 1; // Always active
     $image = $_FILES['attraction_image'];
+
+    // Validate and sanitize the description and title to prevent unsupported characters
+    if (containsInvalidCharacters($description) || containsInvalidCharacters($title)) {
+        echo "<script>alert('Invalid characters detected in input. Please remove special characters or emojis.');</script>";
+        return;
+    }
 
     if ($image['error'] === 0) {
         $target_dir = 'images/attractions/';
@@ -58,6 +65,19 @@ function handleAddAttraction($con)
             echo "<script>alert('Invalid image format.');</script>";
         }
     }
+}
+
+// Function to sanitize input by removing unsupported characters
+function sanitizeInput($input)
+{
+    // Remove unsupported characters (e.g., emojis)
+    return preg_replace('/[^\x20-\x7E]/', '', $input); // Allows only printable ASCII characters
+}
+
+// Function to check if input contains invalid characters
+function containsInvalidCharacters($input)
+{
+    return preg_match('/[^\x20-\x7E]/', $input); // Matches any non-ASCII printable characters
 }
 
 // Function to handle deleting an attraction
@@ -116,7 +136,7 @@ $attractions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 $dest_stmt->execute();
                                 $destinations = $dest_stmt->fetchAll(PDO::FETCH_ASSOC);
                                 foreach ($destinations as $destination) {
-                                    echo "<option value='{$destination['destination_id']}'>{$destination['name']}</option>";
+                                    echo "<option value='" . htmlspecialchars($destination['destination_id'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . "'>" . htmlspecialchars($destination['name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . "</option>";
                                 }
                                 ?>
                             </select>
@@ -127,7 +147,7 @@ $attractions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea name="description" class="form-control" required></textarea>
+                            <textarea name="description" class="form-control" rows="8" placeholder="Use markdown-like formatting for structure, e.g., headings and bullet points." required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="attraction_image">Image</label>
@@ -160,15 +180,15 @@ $attractions = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <?php foreach ($attractions as $attraction): ?>
                                     <tr>
                                         <td><?= $count++ ?></td>
-                                        <td><?= htmlspecialchars($attraction['destination_name']) ?></td>
-                                        <td><?= htmlspecialchars($attraction['AttractionTitle']) ?></td>
-                                        <td><?= htmlspecialchars($attraction['AttractionDescription']) ?></td>
-                                        <td><img src="<?= htmlspecialchars($attraction['AttractionImage']) ?>" alt="Attraction Image" width="100" /></td>
+                                        <td><?= htmlspecialchars($attraction['destination_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></td>
+                                        <td><?= htmlspecialchars($attraction['AttractionTitle'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></td>
+                                        <td><pre><?= htmlspecialchars($attraction['AttractionDescription'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></pre></td>
+                                        <td><img src="<?= htmlspecialchars($attraction['AttractionImage'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" alt="Attraction Image" width="100" /></td>
                                         <td><?= $attraction['AttractionStatus'] ? 'Active' : 'Inactive' ?></td>
-                                        <td><?= $attraction['AttractionTimeCreated'] ?></td>
+                                        <td><?= htmlspecialchars($attraction['AttractionTimeCreated'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></td>
                                         <td>
                                             <form action="" method="POST" style="display:inline;">
-                                                <input type="hidden" name="attraction_id" value="<?= $attraction['AttractionID'] ?>">
+                                                <input type="hidden" name="attraction_id" value="<?= htmlspecialchars($attraction['AttractionID'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>">
                                                 <button type="submit" name="delete_attraction" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this attraction?')">Delete</button>
                                             </form>
                                         </td>
