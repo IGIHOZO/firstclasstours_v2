@@ -49,8 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Activate or Deactivate Discount
     elseif (isset($_POST['activate']) && isset($_POST['discount_id'])) {
         $discount_id = (int)$_POST['discount_id'];
-        $new_status = ($_POST['action'] == 'activate') ? 1 : 0;
+        // $new_status = ($_POST['action'] == 'activate') ? 1 : 0;
 
+        if (isset($_POST['activate'])) {
+            $new_status = 1;
+        }else if (isset($_POST['deactivate'])) {
+            $new_status = 2;
+        }
         // Update discount status
         $sql = "UPDATE PackageDiscounts SET DiscountStatus = :status WHERE DiscountID = :discount_id";
         $stmt = $con->prepare($sql);
