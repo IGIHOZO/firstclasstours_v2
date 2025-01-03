@@ -113,13 +113,13 @@ $result_attractions = $conn->query($sql_attractions);
                                     <!-- Country Information -->
                                     <div class="destination-country-info">
                                         <h3>Country Information</h3>
-                                        <ul class="country-info-list clearfix">
-                                            <li><i class="fas fa-globe"></i> <span>Country</span> <?= $country_name; ?></li>
-                                            <li><i class="far fa-id-card"></i> <span>Visa Requirements</span> <?= $visa_required; ?></li>
+                 
                                             <li><i class="far fa-comments"></i> <span>Languages Spoken</span> <?= $languages_spoken; ?></li>
                                             <li><i class="fas fa-dollar-sign"></i> <span>Currency Used</span> <?= $currency_used; ?></li>
-                                            <li><i class="fas fa-phone"></i> <span>Support Phone</span> <a href="tel:<?= $support_phone; ?>"> <?= $support_phone; ?></a></li>
-                                            <li><i class="far fa-envelope-open"></i> <span>Support Email</span> <a href="mailto:<?= $support_email; ?>"> <?= $support_email; ?></a></li>
+
+                                                                <ul class="country-info-list clearfix">
+                                            <li><i class="fas fa-globe"></i> <span>Country</span> <?= $country_name; ?></li>
+                                            <li><i class="far fa-id-card"></i> <span>Visa Requirements</span> <?= $visa_required; ?></li>   <li></a></li>
                                             <li><i class="far fa-map"></i> <span>Country Area</span> <?= $country_area; ?></li>
                                         </ul>
                                     </div>
@@ -135,13 +135,13 @@ $result_attractions = $conn->query($sql_attractions);
 
                                 <!-- Sidebar -->
                                 <div class="col-lg-4">
-                                    <div class="widget">
+                                    <!-- <div class="widget">
                                         <h4 class="widget-title">Download</h4>
                                         <div class="widget-download">
                                             <a href="assets/documents/<?= $visa_requirements_document; ?>" target="_blank"><i class="far fa-file-pdf"></i> Visa Requirements </a>
                                             <a href="assets/documents/<?= $country_info; ?>" target="_blank"><i class="far fa-file-pdf"></i> Country Info</a>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 <!-- ATTRACTIONS HERE -->
 <div class="widget" style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);">

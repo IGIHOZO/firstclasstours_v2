@@ -47,19 +47,19 @@
                                 <h3 class="widget-title">Quick Links</h3>
                                 <ul>
                                     <li>
-                                      <a href="aboutus.php"> About Us </a>
+                                      <a href="about.php#aboutDv"> About Us </a>
                                      
                                     </li>
                                     <li>
-                                      <a href="our_background.php"> Our Background </a>
+                                      <a href="about.php#bg"> Our Background </a>
                                      
                                     </li>
                                     <li>
-                                      <a href="vision.php"> Our Vision </a>
+                                      <a href="about.php#vssn"> Our Vision </a>
                                      
                                     </li>
                                     <li>
-                                      <a href="mission.php"> Our Mission </a>
+                                      <a href="about.php#mssn"> Our Mission </a>
                                      
                                     </li>
                                   

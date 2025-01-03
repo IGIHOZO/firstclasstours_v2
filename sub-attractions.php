@@ -52,7 +52,7 @@ $result_sub_attractions = $conn->query($sql_sub_attractions);
         </div>
 
         <!-- Site Breadcrumb -->
-        <div class="site-breadcrumb" style="background: rgba(0, 0, 0, 0.6); padding: 30px; text-align: center; color: #fff;">
+        <div class="site-breadcrumb" style="background: #ffffff; padding: 30px; text-align: center; color: #000000;">
             <p><strong>Explore the Beauty of <?= htmlspecialchars($row_attraction['AttractionTitle']); ?></strong></p>
             <p><?= htmlspecialchars($row_attraction['AttractionDescription']); ?></p>
         </div>

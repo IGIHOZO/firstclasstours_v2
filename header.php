@@ -41,8 +41,9 @@
                     <div class="site-identity">
                         <h1 class="site-title">
                             <a href="index.php">
-                           <img class="white-logo" src="dashboard/images/logo/<?php  echo $website_logo; ?>" alt="logo">
-                           <img class="black-logo" src="dashboard/images/logo/<?php  echo $website_logo; ?>" alt="logo" >
+                           <!-- <img class="white-logo" src="dashboard/images/logo/<?php  echo $website_logo; ?>" alt="logo"> -->
+                           <!-- <img class="black-logo" src="dashboard/images/logo/<?php  echo $website_logo; ?>" alt="logo" > -->
+                           <img class="white-logo" src="dashboard/images/logo/logo1.png" alt="logo">
                         </a>
                         </h1>
                     </div>

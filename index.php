@@ -8,7 +8,40 @@ $con = $dbh; // Assuming this is a valid PDO connection
 <head>
   <?php   include("head.php");  ?>
 </head>
+<style>
+    #main-menus{
+        background-color: #2B4F39!important;
+        color: white!important;
+    }
+    .country-info-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
 
+    .country-info-list i {
+        margin-right: 10px;
+        color: #555;
+        font-size: 18px;
+    }
+
+    .country-info-list span {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .site-breadcrumb {
+        background-size: cover;
+        background-position: center;
+        padding: 120px 0;
+    }
+
+    .about-us-content {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+    }
+</style>
 <body class="home">
 
     <div id="page" class="full-page">
@@ -245,10 +278,11 @@ try {
                                         <img src="<?php echo $package_image; ?>" alt="" style="width: 360px; height: 200px; object-fit: cover; border-radius: 10px;">
                                     </a>
                                 </figure>
-                                <div class="package-price">
+                                <div class="package-price" style="background-color:#2B4F39!important">
                                     <?php if ($discounted_price < $package_price): ?>
+                                        
                                         <h6>
-                                            <span style="text-decoration: line-through; color: #3a53a3;"><small>&nbsp;<?php echo number_format($package_price, 2); ?></small></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <span style="text-decoration: line-through; color: #3a53a3;">&nbsp;<?php echo number_format($package_price, 2); ?></span>&nbsp;&nbsp;&nbsp;&nbsp;
                                             <span> $<?php echo number_format($discounted_price, 2); ?> </span> / per person
                                         </h6>
                                     <?php else: ?>

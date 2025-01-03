@@ -19,6 +19,32 @@ if (!is_dir($background_image_dir)) mkdir($background_image_dir, 0777, true);
 if (!is_dir($mission_image_dir)) mkdir($mission_image_dir, 0777, true);
 if (!is_dir($vision_image_dir)) mkdir($vision_image_dir, 0777, true);
 
+// Handle Delete Request
+if (isset($_GET['delete']) && in_array($_GET['type'], ['AboutImage', 'BackgroundImage', 'MissionImage', 'VisionImage'])) {
+    $type = $_GET['type'];
+
+    // Fetch image path from the database
+    $sql = "SELECT $type FROM about_company";
+    $stmt = $con->prepare($sql);
+    $stmt->execute();
+    $image = $stmt->fetchColumn();
+
+    if ($image && file_exists($image)) {
+        unlink($image); // Delete file from server
+    }
+
+    // Update database
+    $sql = "UPDATE about_company SET $type = NULL";
+    $stmt = $con->prepare($sql);
+    $stmt->execute();
+
+    echo "<script>
+        alert('Image deleted successfully!');
+        window.location = '" . $_SERVER['PHP_SELF'] . "';
+    </script>";
+    exit;
+}
+
 // Handle POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Initialize variables for images
@@ -29,26 +55,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Process About Image
     if (isset($_FILES['about_image']) && $_FILES['about_image']['error'] === 0) {
-        $about_image = time() . '_' . uniqid() . '.' . pathinfo($_FILES['about_image']['name'], PATHINFO_EXTENSION);
-        move_uploaded_file($_FILES['about_image']['tmp_name'], $about_image_dir . $about_image);
+        $about_image = $about_image_dir . time() . '_' . uniqid() . '.' . pathinfo($_FILES['about_image']['name'], PATHINFO_EXTENSION);
+        move_uploaded_file($_FILES['about_image']['tmp_name'], $about_image);
     }
 
     // Process Background Image
     if (isset($_FILES['background_image']) && $_FILES['background_image']['error'] === 0) {
-        $background_image = time() . '_' . uniqid() . '.' . pathinfo($_FILES['background_image']['name'], PATHINFO_EXTENSION);
-        move_uploaded_file($_FILES['background_image']['tmp_name'], $background_image_dir . $background_image);
+        $background_image = $background_image_dir . time() . '_' . uniqid() . '.' . pathinfo($_FILES['background_image']['name'], PATHINFO_EXTENSION);
+        move_uploaded_file($_FILES['background_image']['tmp_name'], $background_image);
     }
 
     // Process Mission Image
     if (isset($_FILES['mission_image']) && $_FILES['mission_image']['error'] === 0) {
-        $mission_image = time() . '_' . uniqid() . '.' . pathinfo($_FILES['mission_image']['name'], PATHINFO_EXTENSION);
-        move_uploaded_file($_FILES['mission_image']['tmp_name'], $mission_image_dir . $mission_image);
+        $mission_image = $mission_image_dir . time() . '_' . uniqid() . '.' . pathinfo($_FILES['mission_image']['name'], PATHINFO_EXTENSION);
+        move_uploaded_file($_FILES['mission_image']['tmp_name'], $mission_image);
     }
 
     // Process Vision Image
     if (isset($_FILES['vision_image']) && $_FILES['vision_image']['error'] === 0) {
-        $vision_image = time() . '_' . uniqid() . '.' . pathinfo($_FILES['vision_image']['name'], PATHINFO_EXTENSION);
-        move_uploaded_file($_FILES['vision_image']['tmp_name'], $vision_image_dir . $vision_image);
+        $vision_image = $vision_image_dir . time() . '_' . uniqid() . '.' . pathinfo($_FILES['vision_image']['name'], PATHINFO_EXTENSION);
+        move_uploaded_file($_FILES['vision_image']['tmp_name'], $vision_image);
     }
 
     // Prepare SQL query for updating images
@@ -113,6 +139,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                             <button type="submit" class="btn btn-success">Update Images</button>
                         </form>
+                    </div>
+                    <hr>
+                    <h3>Uploaded Images</h3>
+                    <div class="row">
+                        <?php
+                        // Fetch all image paths from the database
+                        $sql = "SELECT AboutImage, BackgroundImage, MissionImage, VisionImage FROM about_company";
+                        $stmt = $con->prepare($sql);
+                        $stmt->execute();
+                        $images = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                        // Display images with delete buttons
+                        foreach ($images as $key => $image) {
+                            if ($image) {
+                                echo "<div class='col-md-3 text-center'>
+                                    <img src='$image' alt='$key' class='img-fluid' style='max-width:100%; height:auto;'>
+                                    <br>
+                                    <a href='?delete=true&type=$key' class='btn btn-danger btn-sm'>Delete</a>
+                                </div>";
+                            }
+                        }
+                        ?>
                     </div>
                     <div class="clearfix"></div>
                 </div>

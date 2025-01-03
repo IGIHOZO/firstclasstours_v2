@@ -572,7 +572,7 @@ $intPrice = (int)$package_price;
     .site-breadcrumb {
         background-size: cover; /* Adjusts the size of the background image to cover the entire element */
         background-position: center; /* Centers the background image */
-        padding-top: 50px; /* Adjusts the top padding to reduce space */
+        padding-top: 100px; /* Adjusts the top padding to reduce space */
         padding-bottom: 50px; /* Adjusts the bottom padding to reduce space */
     }
 

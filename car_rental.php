@@ -170,7 +170,51 @@ include("head.php");
 }
 
   </style>
+<style>
+    #main-menus{
+        background-color: #2B4F39!important;
+        color: white!important;
+    }
+    .country-info-list li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-size: 16px;
+    }
 
+    .country-info-list i {
+        margin-right: 10px;
+        color: #555;
+        font-size: 18px;
+    }
+
+    .country-info-list span {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .site-breadcrumb {
+        background-size: cover;
+        background-position: center;
+        padding: 120px 0;
+    }
+
+    .about-us-content {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+    }
+    .header-btn{
+        width: 17%;
+        font-size: 12px;
+    }
+    a{
+        font-size: 14px;
+    }
+    .button-primary{
+        width: 108%;
+        text-align: left;
+    }
+</style>
 
 <div id="page" class="full-page">
         <header id="masthead" class="site-header header-primary">
